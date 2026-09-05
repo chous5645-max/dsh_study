@@ -2,6 +2,8 @@
 
 这个仓库用于学习 DeepSeek Harness（DSH）并开发独立插件。官方源码以 Git submodule 固定在 `source/deepseek-harness`：submodule 的 `origin` 指向个人 Fork，`upstream` 指向官方仓库。插件、实验和学习资料由本仓库管理，DSH 源码修改留在 Fork 的独立分支中。
 
+当前主要开发计划是“资源与证据工作台”：上传资料、模型检索、可验证引用和右侧原文高亮。权威需求、架构、插件划分及 Batch 0–6 验收计划见 [`docs/evidence-workbench-plan.md`](docs/evidence-workbench-plan.md)。
+
 ## 在一台新 Windows 电脑上复刻
 
 准备以下工具：
