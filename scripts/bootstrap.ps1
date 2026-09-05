@@ -33,12 +33,17 @@ function Get-GitRemoteUrl {
         [switch]$Push
     )
 
+    $remoteNames = @(& git -C $Repository remote)
+    if ($LASTEXITCODE -ne 0 -or $remoteNames -notcontains $Remote) {
+        return $null
+    }
+
     $arguments = @('-C', $Repository, 'remote', 'get-url')
     if ($Push) {
         $arguments += '--push'
     }
     $arguments += $Remote
-    $value = & git @arguments 2>$null
+    $value = & git @arguments
     if ($LASTEXITCODE -ne 0) {
         return $null
     }
