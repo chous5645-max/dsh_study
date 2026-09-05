@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    {
+      "id": "local-hello",
+      "path": "plugins/hello-plugin/index.js",
+      "enabled": true
+    }
+  ]
+}

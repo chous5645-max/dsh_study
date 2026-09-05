@@ -1,0 +1,3 @@
+[submodule "source/deepseek-harness"]
+	path = source/deepseek-harness
+	url = https://github.com/chous5645-max/deepseek-harness.git

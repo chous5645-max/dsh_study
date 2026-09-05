@@ -1,0 +1,23 @@
+# Local-only experiments and secrets.
+**/.env
+**/.env.*
+!**/.env.example
+/config/*.local.json
+/config/secrets*.json
+!/config/*.example.json
+/experiments/tmp/
+/.runtime/
+
+# Package/build output.
+**/node_modules/
+.pnpm-store/
+**/lib/
+**/dist/
+**/coverage/
+*.log
+
+# Editors and operating systems.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
