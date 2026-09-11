@@ -3,7 +3,8 @@ param()
 
 $ErrorActionPreference = 'Stop'
 
-$runtimeDirectory = Join-Path $PSScriptRoot '.runtime'
+$workspaceRoot = Split-Path -Parent $PSScriptRoot
+$runtimeDirectory = Join-Path $workspaceRoot '.runtime'
 $processFile = Join-Path $runtimeDirectory 'dsh-process.json'
 
 if (-not (Test-Path $processFile)) {

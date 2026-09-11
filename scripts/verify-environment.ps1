@@ -9,8 +9,7 @@ $ErrorActionPreference = 'Stop'
 $workspaceRoot = Split-Path -Parent $PSScriptRoot
 $sourceDirectory = Join-Path $workspaceRoot 'source\deepseek-harness'
 $expectedRootOrigin = 'https://github.com/chous5645-max/dsh_study.git'
-$expectedForkOrigin = 'https://github.com/chous5645-max/deepseek-harness.git'
-$expectedUpstream = 'https://github.com/deepseek-ai/deepseek-harness.git'
+$expectedDshOrigin = 'https://github.com/deepseek-ai/deepseek-harness.git'
 $failures = [System.Collections.Generic.List[string]]::new()
 
 function Add-CheckFailure {
@@ -95,38 +94,14 @@ else {
         }
     }
 
-    $forkOrigin = Get-RemoteUrl -Repository $sourceDirectory -Remote 'origin'
-    if ($forkOrigin -eq $expectedForkOrigin) {
-        Add-CheckSuccess 'DSH origin points to the user fork'
+    $dshOrigin = Get-RemoteUrl -Repository $sourceDirectory -Remote 'origin'
+    if ($dshOrigin -eq $expectedDshOrigin) {
+        Add-CheckSuccess 'DSH origin points to the official repository'
     }
     else {
-        Add-CheckFailure "DSH origin is '$forkOrigin', expected '$expectedForkOrigin'."
+        Add-CheckFailure "DSH origin is '$dshOrigin', expected '$expectedDshOrigin'."
     }
 
-    $upstream = Get-RemoteUrl -Repository $sourceDirectory -Remote 'upstream'
-    if ($upstream -eq $expectedUpstream) {
-        Add-CheckSuccess 'DSH upstream points to the official repository'
-    }
-    else {
-        Add-CheckFailure "DSH upstream is '$upstream', expected '$expectedUpstream'."
-    }
-
-    $upstreamPush = Get-RemoteUrl -Repository $sourceDirectory -Remote 'upstream' -Push
-    if ($upstreamPush -eq 'DISABLED') {
-        Add-CheckSuccess 'DSH upstream push is disabled'
-    }
-    else {
-        Add-CheckFailure "DSH upstream push URL is '$upstreamPush', expected 'DISABLED'."
-    }
-
-    $masterRemote = (& git -C $sourceDirectory config --get branch.master.remote | Select-Object -Last 1)
-    $masterMerge = (& git -C $sourceDirectory config --get branch.master.merge | Select-Object -Last 1)
-    if ($masterRemote -eq 'upstream' -and $masterMerge -eq 'refs/heads/master') {
-        Add-CheckSuccess 'DSH master tracks upstream/master'
-    }
-    else {
-        Add-CheckFailure "DSH master tracking is '$masterRemote $masterMerge', expected 'upstream refs/heads/master'."
-    }
 }
 
 $pluginConfig = Join-Path $workspaceRoot 'config\plugins.json'

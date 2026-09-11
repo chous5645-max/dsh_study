@@ -3,7 +3,7 @@ param()
 
 $ErrorActionPreference = 'Stop'
 
-$workspaceRoot = $PSScriptRoot
+$workspaceRoot = Split-Path -Parent $PSScriptRoot
 $sourceDirectory = Join-Path $workspaceRoot 'source\deepseek-harness'
 $pluginConfigFile = Join-Path $workspaceRoot 'config\plugins.json'
 $runtimeDirectory = Join-Path $workspaceRoot '.runtime'
@@ -14,7 +14,7 @@ $stdoutFile = Join-Path $runtimeDirectory 'dsh.out.log'
 $stderrFile = Join-Path $runtimeDirectory 'dsh.err.log'
 
 if (-not (Test-Path (Join-Path $sourceDirectory 'package.json'))) {
-    throw "DeepSeek Harness source was not found at $sourceDirectory. Run '.\bootstrap-dsh.cmd' first."
+    throw "DeepSeek Harness source was not found at $sourceDirectory. Run '.\scripts\bootstrap-dsh.cmd' first."
 }
 
 if (-not (Test-Path $pluginConfigFile)) {
@@ -22,7 +22,7 @@ if (-not (Test-Path $pluginConfigFile)) {
 }
 
 if (-not (Test-Path (Join-Path $sourceDirectory 'node_modules\.modules.yaml'))) {
-    throw "DeepSeek Harness dependencies are not installed. Run '.\bootstrap-dsh.cmd' first."
+    throw "DeepSeek Harness dependencies are not installed. Run '.\scripts\bootstrap-dsh.cmd' first."
 }
 
 New-Item -ItemType Directory -Force -Path $runtimeDirectory | Out-Null

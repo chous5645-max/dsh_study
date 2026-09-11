@@ -10,4 +10,4 @@
 6. `../source/deepseek-harness/docs/architecture.zh.md`：整体架构。
 7. `../source/deepseek-harness/docs/cordis-primer.zh.md`：Cordis 生命周期与服务机制。
 
-推荐笔记命名：`YYYY-MM-DD-主题.md`。若上游 API 发生变化，在笔记开头记录当时的 commit SHA。
+推荐笔记命名：`YYYY-MM-DD-主题.md`。每篇笔记开头记录参考的 DSH Tag 与 commit SHA；切换 Tag 后，重新核对涉及的 API。

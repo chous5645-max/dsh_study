@@ -10,8 +10,8 @@ $workspaceRoot = Split-Path -Parent $PSScriptRoot
 $sourceDirectory = Join-Path $workspaceRoot 'source\deepseek-harness'
 $runtimeDirectory = Join-Path $workspaceRoot '.runtime'
 $corepackHome = Join-Path $runtimeDirectory 'corepack'
+$corepackBin = Join-Path $runtimeDirectory 'corepack-bin'
 $studyRepository = 'https://github.com/chous5645-max/dsh_study.git'
-$forkRepository = 'https://github.com/chous5645-max/deepseek-harness.git'
 $officialRepository = 'https://github.com/deepseek-ai/deepseek-harness.git'
 
 function Invoke-Checked {
@@ -83,14 +83,14 @@ $pinnedCommit = ($indexEntry -split '\s+')[1]
 
 # Configure and initialize the pinned checkout without relying on Git's shell-based
 # submodule helper. This also works in restricted Windows shells with a minimal PATH.
-Invoke-Checked git -C $workspaceRoot config submodule.source/deepseek-harness.url $forkRepository
+Invoke-Checked git -C $workspaceRoot config submodule.source/deepseek-harness.url $officialRepository
 Invoke-Checked git -C $workspaceRoot config submodule.source/deepseek-harness.active true
 if (-not (Test-Path (Join-Path $sourceDirectory '.git'))) {
     if ((Test-Path $sourceDirectory) -and (Get-ChildItem -Force $sourceDirectory | Select-Object -First 1)) {
         throw "$sourceDirectory exists but is not a Git checkout. Move it aside and run bootstrap again."
     }
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $sourceDirectory) | Out-Null
-    Invoke-Checked git clone $forkRepository $sourceDirectory
+    Invoke-Checked git clone $officialRepository $sourceDirectory
     Invoke-Checked git -C $sourceDirectory checkout --detach $pinnedCommit
 }
 
@@ -98,29 +98,29 @@ if (-not (Test-Path (Join-Path $sourceDirectory 'package.json'))) {
     throw "DeepSeek Harness submodule was not initialized at $sourceDirectory."
 }
 
-$forkOrigin = Get-GitRemoteUrl -Repository $sourceDirectory -Remote 'origin'
-if ($null -eq $forkOrigin) {
-    Invoke-Checked git -C $sourceDirectory remote add origin $forkRepository
+$origin = Get-GitRemoteUrl -Repository $sourceDirectory -Remote 'origin'
+if ($null -eq $origin) {
+    Invoke-Checked git -C $sourceDirectory remote add origin $officialRepository
 }
-elseif ($forkOrigin -ne $forkRepository) {
-    throw "The DSH origin is '$forkOrigin', expected '$forkRepository'."
-}
-
-$upstream = Get-GitRemoteUrl -Repository $sourceDirectory -Remote 'upstream'
-if ($null -eq $upstream) {
-    Invoke-Checked git -C $sourceDirectory remote add upstream $officialRepository
-}
-elseif ($upstream -ne $officialRepository) {
-    throw "The DSH upstream is '$upstream', expected '$officialRepository'."
+elseif ($origin -ne $officialRepository) {
+    Invoke-Checked git -C $sourceDirectory remote set-url origin $officialRepository
 }
 
-Invoke-Checked git -C $sourceDirectory remote set-url --push upstream DISABLED
+if ($null -ne (Get-GitRemoteUrl -Repository $sourceDirectory -Remote 'upstream')) {
+    Invoke-Checked git -C $sourceDirectory remote remove upstream
+}
+
+Invoke-Checked git -C $sourceDirectory remote set-url --push origin DISABLED
 Invoke-Checked git -C $sourceDirectory config rerere.enabled true
-Invoke-Checked git -C $sourceDirectory config branch.master.remote upstream
-Invoke-Checked git -C $sourceDirectory config branch.master.merge refs/heads/master
 
 New-Item -ItemType Directory -Force -Path $corepackHome | Out-Null
+New-Item -ItemType Directory -Force -Path $corepackBin | Out-Null
 $env:COREPACK_HOME = $corepackHome
+& corepack enable --install-directory $corepackBin
+if ($LASTEXITCODE -ne 0) {
+    throw 'Corepack could not create project-local package manager shims.'
+}
+$env:PATH = "$corepackBin;$env:PATH"
 
 Push-Location $sourceDirectory
 try {
@@ -157,4 +157,4 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host ''
 Write-Host 'DeepSeek Harness workspace is ready.'
-Write-Host 'Start it with .\start-dsh.cmd'
+Write-Host 'Start it with .\scripts\start-dsh.cmd'
