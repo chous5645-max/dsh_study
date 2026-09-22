@@ -45,15 +45,15 @@ dsh_study/
 初始化和启动不会联网更新 DSH，只使用父仓库提交的 submodule commit。需要切换版本时，先停止 DSH，并明确指定官方 Tag：
 
 ```powershell
-.\scripts\upstream-status.ps1 -Ref dsh-v0.1.5-rc.2
-.\scripts\update-dsh.ps1 -Ref dsh-v0.1.5-rc.2 -InstallDependencies -Build
+.\scripts\upstream-status.ps1 -Ref dsh-v0.1.6-alpha.2
+.\scripts\update-dsh.ps1 -Ref dsh-v0.1.6-alpha.2 -InstallDependencies -Build
 .\scripts\verify-environment.ps1 -RequireDependencies -RequireBuild
 ```
 
 `update-dsh.ps1` 会确认 Tag 存在、以 detached HEAD 检出其精确 commit、安装依赖、构建，并暂存 submodule 指针。验证后提交该指针及相关工作区改动，即可把 DSH 固定在这个版本：
 
 ```powershell
-git commit -m "chore: pin DeepSeek Harness dsh-v0.1.5-rc.2"
+git commit -m "chore: pin DeepSeek Harness dsh-v0.1.6-alpha.2"
 ```
 
 不需要更新时，不运行版本切换脚本。旧的 `update-upstream.ps1` 仅为兼容保留；请使用 `update-dsh.ps1 -Ref <tag>`。
