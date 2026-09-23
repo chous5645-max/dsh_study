@@ -1,0 +1,171 @@
+[
+  {
+    "id": "lunch",
+    "title": "午饭 35 元，后到的银行流水",
+    "eyebrow": "补全账户 · 同笔候选",
+    "kind": "同笔匹配",
+    "date": "9 月 22 日",
+    "place": "城南小馆",
+    "manual": "“昨天午饭 35，用微信付的”",
+    "manualMeta": "自然语言 · 已确认消费 ¥35 · 账户待补",
+    "source": "工商银行 · 扣款 ¥35.00",
+    "sourceMeta": "银行截图第 2 行 · 交易时间 12:18 · 卡尾号 2351",
+    "extraSource": "微信账单.csv 第 18 行 · 微信支付渠道 · 后到的同笔来源候选",
+    "sourceHint": "微信是支付渠道；这条流水明确提供真实扣款账户。",
+    "options": [
+      {
+        "key": "same",
+        "label": "确认同一笔",
+        "note": "为原账目补上银行卡证据与付款对应",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": -35
+      },
+      {
+        "key": "separate",
+        "label": "确为不同笔",
+        "note": "保留原账目账户待补，银行扣款用途待定",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": 0
+      },
+      {
+        "key": "defer",
+        "label": "暂缓判断",
+        "note": "继续保留候选，不改变正式账务",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": 0
+      }
+    ],
+    "businessAmountMinor": 3500,
+    "bankMovementMinor": -3500,
+    "currency": "CNY"
+  },
+  {
+    "id": "sameamount",
+    "title": "同日另一笔 35 元",
+    "eyebrow": "同额歧义 · 不能仅凭金额合并",
+    "kind": "身份核对",
+    "date": "9 月 22 日",
+    "place": "文具店",
+    "manual": "“下午买本子 35 元”",
+    "manualMeta": "自然语言 · 已确认消费 ¥35 · 账户待补",
+    "source": "工商银行 · 扣款 ¥35.00",
+    "sourceMeta": "银行截图第 5 行 · 交易时间 16:42 · 商户 文具店 · 卡尾号 2351",
+    "sourceHint": "午饭也为 35 元，但时间和商户不同；需要选择具体对应关系。",
+    "options": [
+      {
+        "key": "second",
+        "label": "匹配文具账目",
+        "note": "两笔 35 元消费都保留，只给文具账目补付款",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": -35
+      },
+      {
+        "key": "independent",
+        "label": "与现有账目无关",
+        "note": "将银行扣款保留为用途待补，不自动造消费",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": 0
+      },
+      {
+        "key": "defer",
+        "label": "暂缓判断",
+        "note": "不因同金额做自动合并",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": 0
+      }
+    ],
+    "businessAmountMinor": 3500,
+    "bankMovementMinor": -3500,
+    "currency": "CNY"
+  },
+  {
+    "id": "partial",
+    "title": "聚餐 100 元，只找到付款 60 元",
+    "eyebrow": "金额分配 · 部分匹配",
+    "kind": "部分付款",
+    "date": "9 月 21 日",
+    "place": "朋友聚餐",
+    "manual": "“聚餐一共 100 元”",
+    "manualMeta": "自然语言 · 已确认消费 ¥100 · 付款待匹配",
+    "source": "工商银行 · 扣款 ¥60.00",
+    "sourceMeta": "银行截图第 7 行 · 交易时间 20:09 · 卡尾号 2351",
+    "sourceHint": "只知道这笔 60 元扣款；剩余 40 元不能凭差额虚构现金付款。",
+    "options": [
+      {
+        "key": "match60",
+        "label": "匹配其中 60 元",
+        "note": "消费仍是 100 元，剩余 40 元待匹配",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": -60
+      },
+      {
+        "key": "unrelated",
+        "label": "不是这次聚餐",
+        "note": "两边保持独立，继续核对付款去向",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": 0
+      },
+      {
+        "key": "defer",
+        "label": "暂缓判断",
+        "note": "保留部分匹配建议",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": 0
+      }
+    ],
+    "businessAmountMinor": 10000,
+    "bankMovementMinor": -6000,
+    "currency": "CNY"
+  },
+  {
+    "id": "conflict",
+    "title": "手记 35 元，流水显示 30 元",
+    "eyebrow": "金额冲突 · 必须明示差异",
+    "kind": "金额差异",
+    "date": "9 月 20 日",
+    "place": "咖啡",
+    "manual": "“咖啡 35 元”",
+    "manualMeta": "自然语言 · 已确认消费 ¥35 · 账户待补",
+    "source": "工商银行 · 扣款 ¥30.00",
+    "sourceMeta": "银行截图第 9 行 · 交易时间 09:37 · 卡尾号 2351",
+    "sourceHint": "银行证明实际扣款 30 元；不能自动猜测优惠或另一笔 5 元付款。",
+    "options": [
+      {
+        "key": "match30",
+        "label": "仅匹配 30 元",
+        "note": "消费仍是 35 元，剩余 5 元待说明",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": -30
+      },
+      {
+        "key": "correct30",
+        "label": "明确更正消费为 30 元",
+        "note": "需记录这次人工更正；消费减少 5 元",
+        "expense": -5,
+        "bank": 0,
+        "unmatched": -35
+      },
+      {
+        "key": "defer",
+        "label": "暂缓判断",
+        "note": "保留差异，不覆盖原手记",
+        "expense": 0,
+        "bank": 0,
+        "unmatched": 0
+      }
+    ],
+    "businessAmountMinor": 3500,
+    "bankMovementMinor": -3000,
+    "currency": "CNY"
+  }
+]

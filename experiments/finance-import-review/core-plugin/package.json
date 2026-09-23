@@ -1,0 +1,10 @@
+{
+  "name": "dsh-finance-core-prototype",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.mjs",
+    "./package.json": "./package.json"
+  }
+}

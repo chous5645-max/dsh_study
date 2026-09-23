@@ -12,6 +12,8 @@
 - `experiments/` 存放可丢弃的探索。稳定实现移入 `plugins/`，稳定结论移入 `learning/`。
 - `.runtime/` 是本地运行状态，绝不提交。
 
+- finance/ 存放 DSH Finance 产品需求、技术决策和 UI 设计；Finance 的短期集成烟测与交互原型仍放在 experiments/，达到长期维护标准后才迁入 plugins/ 并配置启用。
+
 ## DSH 版本策略
 
 - DSH remote 必须是 `https://github.com/deepseek-ai/deepseek-harness.git`，只使用官方源码，不使用 Fork。

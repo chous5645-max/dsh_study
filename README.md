@@ -11,7 +11,8 @@ dsh_study/
 ├── source/deepseek-harness/  # 官方 DSH submodule；固定到一个 Tag 对应的 commit
 ├── plugins/                  # 本地插件与最小示例
 ├── learning/                 # DSH 学习笔记与阅读索引
-├── experiments/              # 可丢弃的探索与原型
+├── experiments/              # 可丢弃的探索与原型（含 Finance 烟测与 UI 原型）
+├── finance/                  # DSH Finance 需求、技术与 UI 设计文档
 ├── config/plugins.json       # 启用的本地插件
 └── scripts/                  # 所有项目脚本与命令入口
     ├── bootstrap-dsh.cmd/.ps1
@@ -39,6 +40,10 @@ dsh_study/
 - 在 `plugins/<插件名>/` 创建插件，并在 `config/plugins.json` 中显式启用它。
 - `plugins/hello-plugin` 是最小 bundle 示例；先复制和改名，再发展为自己的插件。
 - `experiments/` 只放短期验证；稳定结论进入 `learning/`，稳定实现进入 `plugins/`。
+
+## DSH Finance
+
+[Finance 设计入口](finance/README.md)记录个人财务系统的需求、对象模型和 UI 方向。可丢弃的[导入核对原型](experiments/finance-import-review/README.md)与[DSH 集成烟测](experiments/finance-dsh-smoke/README.md)放在 experiments；它们通过隔离脚本加载，不属于 config/plugins.json 中启用的长期插件。
 
 ## DSH 版本：官方 Tag
 
