@@ -2,7 +2,7 @@
 
 基于 DeepSeek Harness 的个人记账与财务分析项目。
 
-当前阶段：总体需求讨论已完成，正在细化技术设计；技术方案中未标为已确认的内容仍是待验证提案，尚未开始实现。完成对象模型与关键技术验证后再划分开发优先级。
+当前阶段：总体业务地图已覆盖主要领域，具体业务口径仍待验收，技术设计与隔离验证正在进行；技术方案中未标为已确认的内容仍是待验证提案，尚未开始正式产品开发。完成业务验收、对象模型与关键技术验证后再划分开发优先级。
 
 已确认的业务用语见[领域术语](CONTEXT.md)。
 
@@ -39,7 +39,7 @@
 ## 决策与验证
 
 - [决策与待讨论问题](docs/decisions.md)：区分需求决策、技术方向及待定提案。
-- [验证计划](docs/planning/validation-plan.md)与[V0 合成账务样例](docs/planning/v0-acceptance-cases.md)：样例预期尚待业务验收；V1 已做部分集成验证，[V2 单来源隔离实验](../experiments/finance-single-source/README.md)仅覆盖部分合成场景，V3—V5 尚待执行，不代表开发排期。
+- [验证计划](docs/planning/validation-plan.md)、[V0 合成账务样例](docs/planning/v0-acceptance-cases.md)与[业务验收评审单](docs/planning/v0-review.md)：跨期回看、未批准报销的待定展示、明确重复跳过及独立记录的批次部分入账已确认，V0 整体仍待验收；V1 已做部分集成验证，[V2 单来源隔离实验](../experiments/finance-single-source/README.md)与[V3 跨来源逻辑实验](../experiments/finance-cross-source/README.md)各覆盖部分合成场景，V3 整体及 V4—V5 尚未验收，不代表开发排期。
 
 ## 维护约定
 

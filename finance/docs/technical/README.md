@@ -7,6 +7,9 @@
 - [双插件架构](architecture.md)：finance-core、finance-ui 与 DSH Agent 职责，候选工具和调用关系。
 - [DSH 官方源码核验](dsh-source-research.md)与[第一轮运行验证](dsh-v1-verification.md)：固定版本的一手接口依据和可复现烟测结果。
 - [解析与导入](parsing-and-import.md)：格式识别、解析、标准化、去重、任务与核对流程。
+- [来源身份与跨来源同笔匹配](source-identity-and-matching.md)：操作重试、同源重复、共同订单号自动关联及防重复计数的技术方案。
+- [个人账单与银行字段证据](input-field-evidence.md)：区分当前可证事实与真实格式缺口，列出脱敏样例到位后的核对方法。
+- [SQLite 持久化隔离验证](sqlite-persistence-verification.md)：合成订单在单元事务、两进程竞争、进程退出及批次重试中的运行结果。
 - [统一草稿与提交校验](drafts-and-posting.md)：字段依据、待补信息、阻断规则和跨入口一致性。
 - [核心业务 Interface](core-interface.md)：共同操作契约、查询、核对、任务和更正。
 - [对象模型](domain-model.md)：实体候选、金额表示、关系、账本隔离与币种扩展。
